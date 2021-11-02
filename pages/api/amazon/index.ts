@@ -58,9 +58,9 @@ export default async function handler(
         const image = $("body").children().find("#landingImage").attr("src");
 
         const obj = {
+          availability,
           title,
           price: price || price2 || dealPrice,
-          availability,
           image,
         };
 

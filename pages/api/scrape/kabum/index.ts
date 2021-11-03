@@ -33,7 +33,14 @@ export default async function handler(
             .find("b")
             .map((index, element) => index === 3 && $(element).text())
             .toArray()[3];
-          const price = priceRaw.replace("R$", "").trim() || null;
+          const price =
+            Number(
+              priceRaw
+                .replace("R$", "")
+                .replace(".", "")
+                .replace(",", ".")
+                .trim()
+            ) || null;
 
           const image = $("body")
             .children()

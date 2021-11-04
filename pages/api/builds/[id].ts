@@ -30,17 +30,9 @@ export default auth(async (req: any, res: NextApiResponse) => {
           date: -1,
         });
 
-        if (builds.length === 0) {
-          res
-            .status(200)
-            .send({ success: { status: 200, msg: "Build deleted." } });
-        } else {
-          res
-            .status(200)
-            .send({ success: { status: 200, msg: "Build deleted." }, builds });
-        }
-
-        return;
+        res
+          .status(200)
+          .send({ success: { status: 200, msg: "Build deleted." }, builds });
       } catch (error: any) {
         if (error)
           return res

@@ -44,11 +44,7 @@ export default auth(async (req: any, res: NextApiResponse) => {
           date: -1,
         });
 
-        if (builds.length === 0) {
-          res.status(200).send({ msg: "This user has no builds." });
-        } else {
-          res.status(200).send(builds);
-        }
+        res.status(200).send(builds);
       } catch (error: any) {
         if (error)
           return res

@@ -57,12 +57,18 @@ export default async function handler(
 
         res.status(200).json(obj);
       } catch (error: any) {
-        res.status(400).json({ error: error.message });
+        if (error)
+          return res
+            .status(400)
+            .send({ error: { message: error.message, status: 400 } });
       }
+
       break;
 
     default:
-      res.status(400).json({ error: "Wrong Method." });
+      res
+        .status(400)
+        .json({ error: { message: "Wrong Method.", status: 400 } });
       break;
   }
 }

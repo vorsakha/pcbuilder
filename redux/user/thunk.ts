@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API_URL } from "../../constants";
 
-export const signUp = createAsyncThunk("user/signUp", async (body) => {
+export const signUp = createAsyncThunk("user/signUp", async (body: any) => {
   const config = {
     headers: {
       "Content-type": "application/json",

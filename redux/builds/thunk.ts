@@ -16,7 +16,7 @@ export const loadBuilds = createAsyncThunk("builds/loadBuilds", async () => {
   let builds: BuildsInterface[] = [];
 
   fetchBuilds.data.forEach((b: any) => {
-    builds.push(b.build);
+    b.build.length !== 0 && builds.push(b.build);
   });
 
   return builds;
@@ -37,7 +37,7 @@ export const createBuild = createAsyncThunk(
       },
     };
 
-    const fetchBuilds = await axios.post(`${API_URL}api/builds`);
+    const fetchBuilds = await axios.post(`${API_URL}api/builds`, body, config);
 
     let builds: BuildsInterface[] = [];
 

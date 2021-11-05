@@ -5,3 +5,9 @@ type NextApiRequestWithUser = NextApiRequest & {
     id: string;
   };
 };
+
+interface BuildsInterface {
+  title: string;
+  price: number;
+  image: string;
+}

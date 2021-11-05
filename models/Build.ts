@@ -16,7 +16,7 @@ import mongoose from "mongoose";
 
 interface BuildInterface {
   user: mongoose.Schema.Types.ObjectId;
-  builds: ArrayConstructor;
+  build: ArrayConstructor;
 }
 
 const Build = new mongoose.Schema<BuildInterface>({
@@ -24,7 +24,7 @@ const Build = new mongoose.Schema<BuildInterface>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  builds: { type: Array, required: true },
+  build: { type: Array, required: true },
 });
 
 module.exports =

@@ -45,17 +45,17 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
     // @desc Get user by token
     // todo - if needed
-    case "GET":
-      // try {
-      //   await dbConnect();
+    // case "GET":
+    // try {
+    //   await dbConnect();
 
-      //   const user = await userModel.findById(req.user.id).select("-password");
+    //   const user = await userModel.findById(req.user.id).select("-password");
 
-      //   res.status(200).json(user);
-      // } catch (error: any) {
-      //   res.status(400).json({ error: error.message });
-      // }
-      break;
+    //   res.status(200).json(user);
+    // } catch (error: any) {
+    //   res.status(400).json({ error: error.message });
+    // }
+    // break;
 
     default:
       res

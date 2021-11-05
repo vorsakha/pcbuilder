@@ -15,11 +15,11 @@ export default auth(async (req: any, res: NextApiResponse) => {
       try {
         await dbConnect();
 
-        const { builds } = req.body;
+        const { build } = req.body;
 
         const newBuild = new buildModel({
           user: req.user.id,
-          builds,
+          build,
         });
 
         // Save build

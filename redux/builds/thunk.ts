@@ -16,7 +16,11 @@ export const loadBuilds = createAsyncThunk("builds/loadBuilds", async () => {
   let builds: BuildsInterface[] = [];
 
   fetchBuilds.data.forEach((b: any) => {
-    b.build.length !== 0 && builds.push(b.build);
+    b.build.length !== 0 &&
+      builds.push({
+        build: b.build,
+        id: b._id,
+      });
   });
 
   return builds;
@@ -24,7 +28,7 @@ export const loadBuilds = createAsyncThunk("builds/loadBuilds", async () => {
 
 export const createBuild = createAsyncThunk(
   "builds/createBuild",
-  async (body) => {
+  async (body: BuildsInterface) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     } else {
@@ -42,7 +46,10 @@ export const createBuild = createAsyncThunk(
     let builds: BuildsInterface[] = [];
 
     fetchBuilds.data.forEach((b: any) => {
-      builds.push(b.build);
+      builds.push({
+        build: b.build,
+        id: b._id,
+      });
     });
 
     return builds;
@@ -51,7 +58,7 @@ export const createBuild = createAsyncThunk(
 
 export const deleteBuild = createAsyncThunk(
   "builds/deleteBuild",
-  async (id) => {
+  async (id: string) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     } else {
@@ -63,7 +70,10 @@ export const deleteBuild = createAsyncThunk(
     let builds: BuildsInterface[] = [];
 
     res.data.forEach((b: any) => {
-      builds.push(b.build);
+      builds.push({
+        build: b.build,
+        id: b._id,
+      });
     });
 
     return builds;

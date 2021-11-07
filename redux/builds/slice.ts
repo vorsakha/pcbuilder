@@ -72,7 +72,7 @@ const slice = createSlice({
         state.builds = action.payload;
         state.loading = false;
         state.alert = {
-          type: "DANGER",
+          type: "SUCCESS",
           msg: "Build deleted.",
         };
       })

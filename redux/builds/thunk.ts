@@ -18,6 +18,7 @@ export const loadBuilds = createAsyncThunk("builds/loadBuilds", async () => {
   fetchBuilds.data.forEach((b: any) => {
     b.build.length !== 0 &&
       builds.push({
+        name: b.name,
         build: b.build,
         id: b._id,
       });
@@ -47,6 +48,7 @@ export const createBuild = createAsyncThunk(
 
     fetchBuilds.data.forEach((b: any) => {
       builds.push({
+        name: b.name,
         build: b.build,
         id: b._id,
       });
@@ -69,8 +71,9 @@ export const deleteBuild = createAsyncThunk(
 
     let builds: BuildsInterface[] = [];
 
-    res.data.forEach((b: any) => {
+    res.data.builds.forEach((b: any) => {
       builds.push({
+        name: b.name,
         build: b.build,
         id: b._id,
       });

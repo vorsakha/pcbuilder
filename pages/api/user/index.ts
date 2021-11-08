@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
       try {
         await dbConnect();
 
-        const userExists = await userModel.findOne({ name: req.body.name });
+        const userExists = await userModel.findOne({ email: req.body.email });
 
         if (userExists) {
           res.status(400).send("User already exists.");

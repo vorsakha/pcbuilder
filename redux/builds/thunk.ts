@@ -11,20 +11,26 @@ export const loadBuilds = createAsyncThunk("builds/loadBuilds", async () => {
     setAuthToken();
   }
 
-  const fetchBuilds = await axios.get(`${API_URL}api/builds`);
+  try {
+    const fetchBuilds = await axios.get(`${API_URL}api/builds`);
 
-  let builds: BuildsInterface[] = [];
+    let builds: BuildsInterface[] = [];
 
-  fetchBuilds.data.forEach((b: any) => {
-    b.build.length !== 0 &&
-      builds.push({
-        name: b.name,
-        build: b.build,
-        id: b._id,
-      });
-  });
+    fetchBuilds.data.forEach((b: any) => {
+      b.build.length !== 0 &&
+        builds.push({
+          name: b.name,
+          build: b.build,
+          id: b._id,
+        });
+    });
 
-  return builds;
+    return builds;
+  } catch (error: any) {
+    console.error(error.message);
+
+    return null;
+  }
 });
 
 export const createBuild = createAsyncThunk(
@@ -42,19 +48,29 @@ export const createBuild = createAsyncThunk(
       },
     };
 
-    const fetchBuilds = await axios.post(`${API_URL}api/builds`, body, config);
+    try {
+      const fetchBuilds = await axios.post(
+        `${API_URL}api/builds`,
+        body,
+        config
+      );
 
-    let builds: BuildsInterface[] = [];
+      let builds: BuildsInterface[] = [];
 
-    fetchBuilds.data.forEach((b: any) => {
-      builds.push({
-        name: b.name,
-        build: b.build,
-        id: b._id,
+      fetchBuilds.data.forEach((b: any) => {
+        builds.push({
+          name: b.name,
+          build: b.build,
+          id: b._id,
+        });
       });
-    });
 
-    return builds;
+      return builds;
+    } catch (error: any) {
+      console.error(error.message);
+
+      return null;
+    }
   }
 );
 
@@ -67,18 +83,24 @@ export const deleteBuild = createAsyncThunk(
       setAuthToken();
     }
 
-    const res = await axios.delete(`${API_URL}api/builds/${id}`);
+    try {
+      const res = await axios.delete(`${API_URL}api/builds/${id}`);
 
-    let builds: BuildsInterface[] = [];
+      let builds: BuildsInterface[] = [];
 
-    res.data.builds.forEach((b: any) => {
-      builds.push({
-        name: b.name,
-        build: b.build,
-        id: b._id,
+      res.data.builds.forEach((b: any) => {
+        builds.push({
+          name: b.name,
+          build: b.build,
+          id: b._id,
+        });
       });
-    });
 
-    return builds;
+      return builds;
+    } catch (error: any) {
+      console.error(error.message);
+
+      return null;
+    }
   }
 );

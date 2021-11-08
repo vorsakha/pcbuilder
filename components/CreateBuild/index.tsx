@@ -7,6 +7,7 @@ import Image from "next/image";
 import Card from "../common/Card";
 import { MdAddBox as AddIcon } from "@react-icons/all-files/md/MdAddBox";
 import { MdIndeterminateCheckBox as RemoveIcon } from "@react-icons/all-files/md/MdIndeterminateCheckBox";
+import { handleTitle } from "../../utils/format";
 
 const CreateBuild = () => {
   const { loading } = useAppSelector((state) => state.builds);
@@ -96,12 +97,18 @@ const CreateBuild = () => {
                   <Card key={key}>
                     <div className="flex items-center">
                       <div>
-                        <Button danger click={() => handleRemoveItem(key)}>
+                        <Button
+                          danger
+                          click={() => handleRemoveItem(item.title)}
+                          disabled={itemLoading}
+                        >
                           <RemoveIcon />
                         </Button>
                       </div>
                     </div>
-                    <h2>{item.title}</h2>
+                    <h2 className="flex items-center">
+                      {handleTitle(item.title, true)}
+                    </h2>
                     <h3 className="flex items-center">
                       <strong>R${item.price}</strong>
                     </h3>

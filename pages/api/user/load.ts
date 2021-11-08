@@ -23,15 +23,14 @@ export default auth(
               .findById(req.user.id)
               .select("-password");
 
-            return res.send(user);
+            return res.status(200).send(user);
           }
 
-          return res.json({ msg: "No token provided" });
+          res.status(401).send({ msg: "No token provided" });
         } catch (error: any) {
-          if (error)
-            return res
-              .status(400)
-              .send({ error: { message: error.message, status: 400 } });
+          return res
+            .status(400)
+            .send({ error: { message: error.message, status: 400 } });
         }
 
       default:

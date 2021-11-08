@@ -16,7 +16,7 @@ export const signUp = createAsyncThunk("user/signUp", async (body: any) => {
   } catch (error: any) {
     console.error(error.message);
 
-    return;
+    throw error.message;
   }
 });
 
@@ -30,7 +30,7 @@ export const deleteAccount = createAsyncThunk(
     } catch (error: any) {
       console.error(error.message);
 
-      return;
+      throw error.message;
     }
   }
 );

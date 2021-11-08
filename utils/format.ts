@@ -1,6 +1,9 @@
-export const handleTitle = (title: string) => {
+export const handleTitle = (title: string, light?: boolean) => {
   let titleString;
 
+  if (light && window.matchMedia("(max-width: 488px)").matches) {
+    return "";
+  }
   if (window.matchMedia("(min-width: 830px)").matches) {
     return title;
   }

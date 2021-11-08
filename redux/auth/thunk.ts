@@ -11,9 +11,15 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
     setAuthToken();
   }
 
-  const res = await axios.get(`${API_URL}api/user/load`);
+  try {
+    const res = await axios.get(`${API_URL}api/user/load`);
 
-  return res.data;
+    return res.data;
+  } catch (error: any) {
+    console.error(error.message);
+
+    return;
+  }
 });
 
 export const logUser = createAsyncThunk(
@@ -25,8 +31,14 @@ export const logUser = createAsyncThunk(
       },
     };
 
-    const res = await axios.post(`${API_URL}api/user/auth`, body, config);
+    try {
+      const res = await axios.post(`${API_URL}api/user/auth`, body, config);
 
-    return res.data;
+      return res.data;
+    } catch (error: any) {
+      console.log(error.message);
+
+      return;
+    }
   }
 );

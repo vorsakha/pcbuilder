@@ -1,6 +1,6 @@
 const Card: React.FC = ({ children }) => {
   return (
-    <li className="border w-full h-24 col-span-1 flex flex-row-reverse gap-4 shadow-md hover:shadow-lg transition ease-in-out rounded py-5 px-6">
+    <li className="border w-full h-24 col-span-1 flex flex-row-reverse justify-between gap-4 shadow-md hover:shadow-lg transition ease-in-out rounded py-5 px-6">
       {children}
     </li>
   );

@@ -33,13 +33,13 @@ const MyBuilds = () => {
               (b, key) =>
                 key < items && (
                   <div
-                    className="grid grid-cols-1 gap-6 my-12 relative"
+                    className="grid grid-cols-1 gap-6 my-12 relative border-t md:p-4"
                     key={key}
                   >
-                    <h2 className="col-span-1 text-xl text-start font-bold">
+                    <h2 className="col-span-1 text-xl text-start font-bold mt-4 md:mt-0">
                       {b.name}
                     </h2>
-                    <div className="col-span-1 flex justify-end absolute top-0 right-0">
+                    <div className="col-span-1 flex justify-end absolute top-0 right-0 mt-2 md:mt-4 md:mr-4">
                       <Button
                         className="text-xl"
                         danger
@@ -61,9 +61,9 @@ const MyBuilds = () => {
                         <p className="font-bold text-xl flex items-center">
                           R${item.price}
                         </p>
-                        <h2 className="text-xl text-start text-blue-500 mb-4">
+                        <h2 className="flex items-center text-lg md:text-xl text-start text-blue-500">
                           <a
-                            className="mr-8 cursor-pointer"
+                            className="cursor-pointer"
                             href={item.url}
                             target="_blank"
                             rel="noreferrer"

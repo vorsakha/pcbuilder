@@ -9,16 +9,28 @@ export const signUp = createAsyncThunk("user/signUp", async (body: any) => {
     },
   };
 
-  const res = await axios.post(`${API_URL}api/user`, body, config);
+  try {
+    const res = await axios.post(`${API_URL}api/user`, body, config);
 
-  return res.data;
+    return res.data;
+  } catch (error: any) {
+    console.error(error.message);
+
+    return;
+  }
 });
 
 export const deleteAccount = createAsyncThunk(
   "user/deleteAccount",
   async (id) => {
-    const res = await axios.delete(`${API_URL}api/user/${id}`);
+    try {
+      const res = await axios.delete(`${API_URL}api/user/${id}`);
 
-    return res.data;
+      return res.data;
+    } catch (error: any) {
+      console.error(error.message);
+
+      return;
+    }
   }
 );

@@ -10,7 +10,7 @@ const SignUp = () => {
   const { formInput, handleInputChange, handleSubmit } = useLogon();
 
   return (
-    <div className="w-full max-w-md mt-6">
+    <div className="w-full mx-auto max-w-md mt-6">
       <form
         className="shadow-lg rounded border px-12 pt-6 pb-8 mb-4"
         onSubmit={(e) => handleSubmit(e)}

@@ -9,9 +9,7 @@ const SignUpPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 md:px-20 text-center">
-        <SignUp />
-      </main>
+      <SignUp />
     </>
   );
 };

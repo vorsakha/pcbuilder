@@ -18,7 +18,7 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
   } catch (error: any) {
     console.error(error.message);
 
-    return;
+    throw error.message;
   }
 });
 
@@ -38,7 +38,7 @@ export const logUser = createAsyncThunk(
     } catch (error: any) {
       console.log(error.message);
 
-      return;
+      throw error.message;
     }
   }
 );

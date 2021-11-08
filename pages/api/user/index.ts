@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
         if (userExists) {
           res.status(400).send("User already exists.");
-          return;
+          throw "User already exists.";
         }
 
         const { email, password } = req.body;
@@ -35,10 +35,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
           res.status(200).json(user);
         });
       } catch (error: any) {
-        if (error)
-          return res
-            .status(400)
-            .send({ error: { message: error.message, status: 400 } });
+        throw error.message;
       }
 
       break;
@@ -59,7 +56,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
     default:
       res
-        .status(400)
+        .status(401)
         .json({ error: { message: "Wrong Method.", status: 400 } });
       break;
   }

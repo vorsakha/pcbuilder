@@ -25,59 +25,60 @@ const MyBuilds = () => {
       {loading && <LoadingSpinner />}
       <h1 className="text-start text-2xl my-4 mt-8">Minhas builds</h1>
       <div className="my-4">
-        {builds === null ? (
+        {builds?.length === 0 ? (
           <p>Nenhuma build salva.</p>
         ) : (
           <ul className="justify-center w-full">
-            {builds.map(
-              (b, key) =>
-                key < items && (
-                  <div
-                    className="grid grid-cols-1 gap-6 my-12 relative border-t md:p-4"
-                    key={key}
-                  >
-                    <h2 className="col-span-1 text-xl text-start font-bold mt-4 md:mt-0">
-                      {b.name}
-                    </h2>
-                    <div className="col-span-1 flex justify-end absolute top-0 right-0 mt-2 md:mt-4 md:mr-4">
-                      <Button
-                        className="text-xl"
-                        danger
-                        disabled={loading}
-                        click={() => handleDeleteBuild(b.id)}
-                      >
-                        {loading ? (
-                          <LoadingSpinner
-                            className="text-white text-md"
-                            notAbsolute
-                          />
-                        ) : (
-                          <DeleteIcon />
-                        )}
-                      </Button>
-                    </div>
-                    {b.build.map((item, k) => (
-                      <Card key={k}>
-                        <p className="font-bold text-xl flex items-center">
-                          R${item.price}
-                        </p>
-                        <h2 className="flex items-center text-lg md:text-xl text-start text-blue-500">
-                          <a
-                            className="cursor-pointer"
-                            href={item.url}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {handleTitle(item.title)}
-                          </a>
-                        </h2>
+            {builds !== null &&
+              builds.map(
+                (b, key) =>
+                  key < items && (
+                    <div
+                      className="grid grid-cols-1 gap-6 my-12 relative border-t md:p-4"
+                      key={key}
+                    >
+                      <h2 className="col-span-1 text-xl text-start font-bold mt-4 md:mt-0">
+                        {b.name}
+                      </h2>
+                      <div className="col-span-1 flex justify-end absolute top-0 right-0 mt-2 md:mt-4 md:mr-4">
+                        <Button
+                          className="text-xl"
+                          danger
+                          disabled={loading}
+                          click={() => handleDeleteBuild(b.id)}
+                        >
+                          {loading ? (
+                            <LoadingSpinner
+                              className="text-white text-md"
+                              notAbsolute
+                            />
+                          ) : (
+                            <DeleteIcon />
+                          )}
+                        </Button>
+                      </div>
+                      {b.build.map((item, k) => (
+                        <Card key={k}>
+                          <p className="font-bold text-xl flex items-center">
+                            R${item.price}
+                          </p>
+                          <h2 className="flex items-center text-lg md:text-xl text-start text-blue-500">
+                            <a
+                              className="cursor-pointer"
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {handleTitle(item.title)}
+                            </a>
+                          </h2>
 
-                        <img src={item.image} alt={item.title} />
-                      </Card>
-                    ))}
-                  </div>
-                )
-            )}
+                          <img src={item.image} alt={item.title} />
+                        </Card>
+                      ))}
+                    </div>
+                  )
+              )}
           </ul>
         )}
         {builds !== null && items < 20

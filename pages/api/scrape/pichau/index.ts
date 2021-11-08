@@ -53,6 +53,7 @@ export default async function handler(
           title,
           price: price || price2,
           image,
+          url,
         };
 
         res.status(200).json(obj);

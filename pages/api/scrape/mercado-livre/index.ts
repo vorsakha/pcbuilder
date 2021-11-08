@@ -60,6 +60,7 @@ export default async function handler(
             title,
             price: promo ? priceIfPromo : price,
             image,
+            url,
           };
         } else {
           obj = {

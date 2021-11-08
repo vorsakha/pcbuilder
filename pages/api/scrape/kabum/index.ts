@@ -53,6 +53,7 @@ export default async function handler(
             title,
             price,
             image,
+            url,
           };
         } else {
           obj = {

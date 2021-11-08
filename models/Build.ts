@@ -17,6 +17,7 @@ import mongoose from "mongoose";
 interface BuildInterface {
   user: mongoose.Schema.Types.ObjectId;
   build: ArrayConstructor;
+  name: string;
 }
 
 const Build = new mongoose.Schema<BuildInterface>({
@@ -24,6 +25,7 @@ const Build = new mongoose.Schema<BuildInterface>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  name: { type: String, required: true },
   build: { type: Array, required: true },
 });
 

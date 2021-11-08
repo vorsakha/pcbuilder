@@ -17,7 +17,9 @@ const auth =
 
       //-> Check if no token
       if (!token) {
-        return res.status(401).json({ msg: "No token, authorization denied" });
+        res.status(401).json({ msg: "No token, authorization denied" });
+
+        throw "No token, authorization denied";
       }
 
       //-> Verify token
@@ -29,7 +31,9 @@ const auth =
 
       return await fn(req, res);
     } catch (err) {
-      return res.status(401).json({ msg: "Token is not valid" });
+      res.status(401).json({ msg: "Token is not valid" });
+
+      throw err;
     }
   };
 

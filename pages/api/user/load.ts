@@ -23,19 +23,18 @@ export default auth(
               .findById(req.user.id)
               .select("-password");
 
-            return res.status(200).send(user);
+            res.status(200).send(user);
+            return;
           }
 
           res.status(401).send({ msg: "No token provided" });
         } catch (error: any) {
-          return res
-            .status(400)
-            .send({ error: { message: error.message, status: 400 } });
+          throw error.message;
         }
 
       default:
         res
-          .status(400)
+          .status(401)
           .json({ error: { message: "Wrong Method.", status: 400 } });
         break;
     }

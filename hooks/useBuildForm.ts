@@ -31,66 +31,87 @@ const useBuildForm = () => {
     });
   };
 
-  const fetchItem = async (url: string, store: string) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  const fetchItem = useCallback(
+    async (url: string, store: string) => {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const body = {
-      url,
-    };
+      const body = {
+        url,
+      };
 
-    const res = await axios.post(`${API_URL}api/scrape/${store}`, body, config);
+      const res = await axios.post(
+        `${API_URL}api/scrape/${store}`,
+        body,
+        config
+      );
 
-    const obj = res.data;
-    obj.url = formInput.url;
+      const obj = res.data;
+      obj.url = formInput.url;
 
-    return obj;
-  };
+      return obj;
+    },
+    [formInput.url]
+  );
 
   const dispatch = useAppDispatch();
 
   const handleAddItem = useCallback(async () => {
-    if (formInput.url !== "" || formInput.platform !== "") {
+    if (formInput.platform !== "" && formInput.url !== "") {
       setItemLoading(true);
 
-      const data = await fetchItem(formInput.url, formInput.platform);
+      try {
+        const data = await fetchItem(formInput.url, formInput.platform);
 
-      if (data.title === null) {
+        if (data.title === null) {
+          dispatch(
+            generateAlert({
+              type: "DANGER",
+              msg: "O item solicitado parece estar fora de estoque.",
+            })
+          );
+
+          setItemLoading(false);
+
+          return;
+        }
+
+        setBuildArr((prevBuild) => [...prevBuild, data]);
+        setItemLoading(false);
+      } catch (error: any) {
         dispatch(
           generateAlert({
             type: "DANGER",
-            msg: "O item solicitado parece estar fora de estoque.",
+            msg: error.message,
           })
         );
-
-        return;
+        setItemLoading(false);
       }
 
-      setBuildArr((prevBuild) => [...prevBuild, data]);
-      setItemLoading(false);
       return;
     } else {
       dispatch(
         generateAlert({
           type: "DANGER",
-          msg: "Você precisa digitar algo...",
+          msg: "Algo deu errado",
         })
       );
 
       return;
     }
-  }, [dispatch, formInput]);
+  }, [dispatch, formInput.url, formInput.platform, fetchItem]);
 
-  const handleRemoveItem = useCallback((id: number) => {
-    const arr = buildArr;
+  const handleRemoveItem = (id: string) => {
+    setItemLoading(true);
 
-    const newArr = arr.splice(id, 1);
+    const result = buildArr.filter((item) => item.title !== id);
 
-    setBuildArr(newArr);
-  }, []); // eslint-disable-line
+    setBuildArr(result);
+    setItemLoading(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

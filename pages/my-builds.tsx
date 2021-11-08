@@ -1,19 +1,15 @@
-import type { NextPage } from "next";
 import { useEffect } from "react";
+import type { NextPage } from "next";
 import Head from "next/head";
-import About from "../components/About";
-import Dashboard from "../components/Dashboard";
+import MyBuilds from "../components/MyBuilds";
 import useLogin from "../hooks/useLogin";
-import { useAppSelector } from "../redux/hook";
 
 const Home: NextPage = () => {
-  const { loggedIn } = useAppSelector((state) => state.auth);
-
-  const { handleLoadUser } = useLogin();
+  const { handleIsLogged } = useLogin();
 
   useEffect(() => {
-    handleLoadUser();
-  }, [handleLoadUser]);
+    handleIsLogged();
+  }, [handleIsLogged]);
 
   return (
     <div>
@@ -23,7 +19,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {loggedIn ? <Dashboard /> : <About />}
+      <MyBuilds />
     </div>
   );
 };

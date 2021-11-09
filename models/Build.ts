@@ -18,6 +18,7 @@ interface BuildInterface {
   user: mongoose.Schema.Types.ObjectId;
   build: ArrayConstructor;
   name: string;
+  date: any;
 }
 
 const Build = new mongoose.Schema<BuildInterface>({
@@ -27,6 +28,7 @@ const Build = new mongoose.Schema<BuildInterface>({
   },
   name: { type: String, required: true },
   build: { type: Array, required: true },
+  date: { type: Date, default: Date.now },
 });
 
 module.exports =

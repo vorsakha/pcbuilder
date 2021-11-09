@@ -1,9 +1,7 @@
-import React, { useEffect, useCallback } from "react";
-import { clearAlert, generateAlert } from "../../redux/alert/slice";
-import { clearAuthAlert } from "../../redux/auth/slice";
-import { clearBuildsAlert } from "../../redux/builds/slice";
+import React, { useEffect } from "react";
+import useAlerts from "../../hooks/useAlerts";
+import { generateAlert } from "../../redux/alert/slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { clearUserAlert } from "../../redux/user/slice";
 
 const Alert: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -12,40 +10,31 @@ const Alert: React.FC = () => {
   const auth = useAppSelector((state) => state.auth.alert);
   const user = useAppSelector((state) => state.user.alert);
   const builds = useAppSelector((state) => state.builds.alert);
-  const show = alert.show;
 
   const type = alert.type || auth.type || user.type || builds.type || null;
   const msg = alert.msg || auth.msg || user.msg || builds.msg || null;
 
-  const clearAlerts = useCallback(() => {
-    setTimeout(() => {
-      dispatch(clearAuthAlert());
-      dispatch(clearBuildsAlert());
-      dispatch(clearUserAlert());
-      dispatch(clearAlert());
-    }, 3000);
-  }, [dispatch]);
+  const { handleAlerts, alerts } = useAlerts();
 
   useEffect(() => {
-    msg !== null &&
-      type !== null &&
+    if (msg !== null && type !== null) {
       dispatch(generateAlert({ type: type, msg: msg }));
-  }, [dispatch, msg, type]);
 
-  useEffect(() => {
-    show && clearAlerts();
-  }, [show, clearAlerts]);
+      handleAlerts(msg, type);
+    }
+  }, [dispatch, msg, type]); //eslint-disable-line
 
   return (
     <div className="fixed z-20 top-15 right-5 py-2 px-4">
-      {show && msg !== null && (
+      {alerts.map((alert, key) => (
         <div
-          className={`${type === "DANGER" ? "bg-red-500" : "bg-green-500"}
-           shadow-md py-2 px-4 no-underline rounded text-white font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none`}
+          key={key}
+          className={`${alert.type === "DANGER" ? "bg-red-500" : "bg-green-500"}
+           shadow-md py-2 px-4 my-2 no-underline rounded text-white font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none`}
         >
           {alert.msg}
         </div>
-      )}
+      ))}
     </div>
   );
 };

@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import Head from "next/head";
 import About from "../components/About";
-import Dashboard from "../components/Dashboard";
 import useLogin from "../hooks/useLogin";
 import { useAppSelector } from "../redux/hook";
+import MyBuilds from "../components/MyBuilds";
 
 const Home: NextPage = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {loggedIn ? <Dashboard /> : <About />}
+      {loggedIn ? <MyBuilds /> : <About />}
     </div>
   );
 };

@@ -5,9 +5,8 @@ import Button from "../common/Button";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Image from "next/image";
 import Card from "../common/Card";
-import { MdAddBox as AddIcon } from "@react-icons/all-files/md/MdAddBox";
-import { MdIndeterminateCheckBox as RemoveIcon } from "@react-icons/all-files/md/MdIndeterminateCheckBox";
 import { handleTitle } from "../../utils/format";
+import { AddIcon, RemoveIcon } from "../common/Icons";
 
 const CreateBuild = () => {
   const { loading } = useAppSelector((state) => state.builds);

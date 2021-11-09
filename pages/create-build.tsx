@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import MyBuilds from "../components/MyBuilds";
 import useLogin from "../hooks/useLogin";
+import Dashboard from "../components/Dashboard";
 
 const Home: NextPage = () => {
   const { handleIsLogged } = useLogin();
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MyBuilds />
+      <Dashboard />
     </div>
   );
 };

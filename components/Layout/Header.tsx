@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { GiHamburgerMenu as HamburgerIcon } from "@react-icons/all-files/gi/GiHamburgerMenu";
-import { MdClose as CloseIcon } from "@react-icons/all-files/md/MdClose";
 import { useAppSelector } from "../../redux/hook";
 import useLogout from "../../hooks/useLogout";
 import NextLink from "../common/NextLink";
 import Button from "../common/Button";
 import { GiBinoculars as LogoIcon } from "@react-icons/all-files/gi/GiBinoculars";
+import LinkButton from "../common/Button/LinkButton";
+import { CloseIcon, HamburgerIcon } from "../common/Icons";
 
 const Header: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
@@ -54,10 +54,10 @@ const Header: React.FC = () => {
               <NextLink
                 className="w-full sm:w-auto py-4"
                 success
-                href="/my-builds"
+                href="/create-build"
                 click={() => setMobileMenu(false)}
               >
-                Minhas Builds
+                Criar Build
               </NextLink>
             </>
           )}
@@ -70,14 +70,13 @@ const Header: React.FC = () => {
               Logout
             </Button>
           ) : (
-            <Link href="/sign-up">
-              <a
-                onClick={() => setMobileMenu(false)}
-                className="md:ml-8 mt-4 md:mt-0 hover:bg-blue-600 bg-blue-500 focus:bg-blue-600  shadow-lg text-gray-200 px-6 py-2 rounded font-medium inline-block ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40"
-              >
-                Criar Conta
-              </a>
-            </Link>
+            <LinkButton
+              onClick={() => setMobileMenu(false)}
+              className="md:ml-8 mt-4 md:mt-0"
+              href="/sign-up"
+            >
+              Criar Conta
+            </LinkButton>
           )}
         </div>
         <div className="flex align-center sm:hidden">

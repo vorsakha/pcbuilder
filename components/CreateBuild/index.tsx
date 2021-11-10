@@ -79,7 +79,7 @@ const CreateBuild = () => {
               <option className="text-gray-700" value="mercado-livre">
                 Mercado Livre
               </option>
-              <option className="text-gray-700" value="Pichau">
+              <option className="text-gray-700" value="pichau">
                 Pichau
               </option>
             </select>

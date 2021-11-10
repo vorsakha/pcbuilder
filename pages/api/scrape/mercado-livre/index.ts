@@ -26,28 +26,51 @@ export default async function handler(
           $("body").children().find(".ui-pdp-stock-information").text() || null;
 
         if (availability === "Estoque disponível") {
-          const title = $("body").children().find(`h1`).text();
+          const title = $("body").children().find(`h1`).text() || null;
           const promo =
             $("body").children().find(`.ui-pdp-price__original-value`).text() ||
             null;
-          const priceIfPromo =
+          const priceIfPromoFraction =
             Number(
               $("body")
                 .children()
-                .find(".price-tag")
+                .find(".ui-pdp-price__second-line")
+                .find(".price-tag-amount")
                 .find(".price-tag-fraction")
                 .map((index, element) => index === 1 && $(element).text())
                 .toArray()[1]
             ) || null;
-          const price =
+          const priceIfPromoCents =
             Number(
               $("body")
                 .children()
-                .find(".price-tag")
+                .find(".ui-pdp-price__second-line")
+                .find(".price-tag-amount")
+                .find(".price-tag-cents")
+                .map((index, element) => index === 1 && $(element).text())
+                .toArray()[1]
+            ) || "";
+          const priceFraction =
+            Number(
+              $("body")
+                .children()
+                .find(".ui-pdp-price__second-line")
+                .find(".price-tag-amount")
                 .find(".price-tag-fraction")
                 .map((index, element) => index === 0 && $(element).text())
                 .toArray()[0]
             ) || null;
+          const priceCents =
+            Number(
+              $("body")
+                .children()
+                .find(".ui-pdp-price__second-line")
+                .find(".price-tag-amount")
+                .find(".price-tag-cents")
+                .map((index, element) => index === 0 && $(element).text())
+                .toArray()[0]
+            ) || "";
+
           const image =
             $("body")
               .children()
@@ -55,10 +78,16 @@ export default async function handler(
               .find("img")
               .attr("src") || null;
 
+          const price = Number(
+            promo
+              ? `${priceIfPromoFraction}.${priceIfPromoCents}`
+              : `${priceFraction}.${priceCents}`
+          );
+
           obj = {
             availability,
             title,
-            price: promo ? priceIfPromo : price,
+            price,
             image,
             url,
           };

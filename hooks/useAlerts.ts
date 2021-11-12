@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { clearAlert } from "../redux/alert/slice";
 import { clearAuthAlert } from "../redux/auth/slice";
 import { clearBuildsAlert } from "../redux/builds/slice";
@@ -18,7 +18,6 @@ const useAlerts = () => {
       dispatch(clearAlert());
 
       const filteredArray = alerts.filter((alert) => alert.msg === id);
-      console.log(filteredArray);
 
       setAlerts(filteredArray);
     }, 3000);

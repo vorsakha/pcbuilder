@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { API_URL } from "../constants";
 import { ScrapeTypes } from "../interfaces";
 import { generateAlert } from "../redux/alert/slice";
 import { createBuild } from "../redux/builds/thunk";
-import { useAppDispatch } from "../redux/hook";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 interface BuildForm {
   name: string;
@@ -21,6 +21,8 @@ const useBuildForm = () => {
   });
   const [buildArr, setBuildArr] = useState<ScrapeTypes[]>([]);
   const [itemLoading, setItemLoading] = useState<boolean>(false);
+
+  const { alert } = useAppSelector((state) => state.builds);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -122,14 +124,18 @@ const useBuildForm = () => {
         build: buildArr,
       })
     );
-
-    setFormInput({
-      name: "",
-      url: "",
-      platform: "",
-    });
-    setBuildArr([]);
   };
+
+  useEffect(() => {
+    if (alert.type === "SUCCESS") {
+      setFormInput({
+        name: "",
+        url: "",
+        platform: "",
+      });
+      setBuildArr([]);
+    }
+  }, [alert]);
 
   return {
     handleAddItem,

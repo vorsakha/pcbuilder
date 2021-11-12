@@ -105,13 +105,20 @@ const CreateBuild = () => {
                         </Button>
                       </div>
                     </div>
-                    <h2 className="flex items-center">
-                      {handleTitle(item.title, true)}
-                    </h2>
                     <h3 className="flex items-center">
                       <strong>R${item.price}</strong>
                     </h3>
-                    <img src={item.image} alt={item.title} />
+                    <h2 className="flex items-center">
+                      {handleTitle(item.title, true)}
+                    </h2>
+                    <div className="relative w-32">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
                   </Card>
                 ))}
             </div>

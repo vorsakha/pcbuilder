@@ -54,14 +54,7 @@ const MyBuilds = () => {
                           disabled={loading}
                           click={() => handleDeleteBuild(b.id)}
                         >
-                          {loading ? (
-                            <LoadingSpinner
-                              className="text-white text-md"
-                              notAbsolute
-                            />
-                          ) : (
-                            <DeleteIcon />
-                          )}
+                          <DeleteIcon />
                         </Button>
                       </div>
                       {b.build.map((item, k) => (
@@ -80,7 +73,14 @@ const MyBuilds = () => {
                             </a>
                           </h2>
 
-                          <img src={item.image} alt={item.title} />
+                          <div className="relative w-32">
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              layout="fill"
+                              objectFit="cover"
+                            />
+                          </div>
                         </Card>
                       ))}
                     </div>

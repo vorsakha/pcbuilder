@@ -68,11 +68,11 @@ const useBuildForm = () => {
       try {
         const data = await fetchItem(formInput.url, formInput.platform);
 
-        if (data.title === null) {
+        if (data.price === null || data.title === null) {
           dispatch(
             generateAlert({
               type: "DANGER",
-              msg: "O item solicitado parece estar fora de estoque.",
+              msg: "O item solicitado parece estar indisponível.",
             })
           );
 

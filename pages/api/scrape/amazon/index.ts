@@ -38,7 +38,15 @@ export default async function handler(
           ) || null;
         const price2 =
           parseFloat(
-            $("body").children().find(".apexPriceToPay").text().replace("$", "")
+            $("body")
+              .children()
+              .find(".apexPriceToPay")
+              .find(".a-offscreen")
+              .text()
+              .replace("$", "")
+              .replace("US", "")
+              .replace("BRL", "")
+              .replace(",", ".")
           ) || null;
         const dealPrice =
           parseFloat(

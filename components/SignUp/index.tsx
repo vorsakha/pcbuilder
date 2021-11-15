@@ -31,7 +31,7 @@ const SignUp = () => {
           className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Senha"
           onChange={(e) => handleInputChange(e)}
           value={formInput.password}
           required
@@ -41,7 +41,7 @@ const SignUp = () => {
           className="shadow text-gray-700  appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring ring-1 ring-black ring-opacity-5 mb-2"
           type="password"
           name="password2"
-          placeholder="Repeat Password"
+          placeholder="Repita a Senha"
           onChange={(e) => handleInputChange(e)}
           value={formInput.password2}
           required
@@ -49,7 +49,7 @@ const SignUp = () => {
         />
         <div className="flex justify-center mt-2">
           <Button success disabled={loading} type="submit">
-            Create Account
+            Criar Conta
           </Button>
         </div>
       </form>

@@ -6,8 +6,8 @@ const About = () => {
   return (
     <div className="grid md:grid-cols-2 gap-8 md:gap-2 mt-8 md:mt-0">
       <div className="col-span-1">
-        <h1 className="flex flex-col text-start mb-8 md:block md:text-6xl text-5xl font-bold">
-          <span className="text-blue-500 font-bold uppercase w-full">
+        <h1 className="flex flex-col text-start mb-8 md:block md:text-6xl text-4xl font-bold">
+          <span className="font-bold uppercase w-full">
             Verifique se aquela promoção é real!
           </span>
         </h1>

@@ -4,7 +4,6 @@ import { useAppSelector } from "../../redux/hook";
 import useLogout from "../../hooks/useLogout";
 import NextLink from "../common/NextLink";
 import Button from "../common/Button";
-import { GiBinoculars as LogoIcon } from "@react-icons/all-files/gi/GiBinoculars";
 import LinkButton from "../common/Button/LinkButton";
 import { CloseIcon, HamburgerIcon } from "../common/Icons";
 
@@ -16,11 +15,10 @@ const Header: React.FC = () => {
   const { handleLogout } = useLogout(setMobileMenu);
 
   return (
-    <nav className="min-w-screen h-14 px-4">
-      <div className="w-full flex flex-row justify-between items-center m-auto h-14 max-w-screen-lg border-b border-gray-200">
+    <nav className="min-w-screen h-20 px-4 font-cairo">
+      <div className="w-full flex flex-row justify-between items-center m-auto h-20 max-w-screen-lg border-b border-gray-200">
         <Link href="/">
-          <a className="flex items-center md:text-2xl md:pl-4 uppercase font-bold text-xl text-blue-500">
-            <LogoIcon className="mr-2 text-4xl" />
+          <a className="flex items-center md:text-4xl md:pl-4 font-tech uppercase font-bold text-3xl text-blue-500">
             PCBuilder
           </a>
         </Link>
@@ -31,33 +29,23 @@ const Header: React.FC = () => {
               : "hidden"
           } sm:flex sm:flex-row sm:justify-end items-center`}
         >
-          <NextLink
-            className="sm:mr-8 w-full py-4 sm:w-auto"
-            success
-            href="/"
-            click={() => setMobileMenu(false)}
-          >
-            {loggedIn ? "Dashboard" : "Home"}
-          </NextLink>
           {!loggedIn && (
-            <NextLink
-              className=" w-full py-4 sm:w-auto"
-              success
-              href="/login"
-              click={() => setMobileMenu(false)}
-            >
-              Login
-            </NextLink>
-          )}
-          {loggedIn && (
             <>
               <NextLink
-                className="w-full sm:w-auto py-4"
+                className="sm:mr-8 w-full py-4 sm:w-auto"
                 success
-                href="/create-build"
+                href="/"
                 click={() => setMobileMenu(false)}
               >
-                Criar Build
+                Home
+              </NextLink>
+              <NextLink
+                className=" w-full py-4 sm:w-auto"
+                success
+                href="/login"
+                click={() => setMobileMenu(false)}
+              >
+                Login
               </NextLink>
             </>
           )}

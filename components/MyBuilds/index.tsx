@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import useBuilds from "../../hooks/useBuilds";
 import usePagination from "../../hooks/usePagination";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import Card from "../common/Card";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Image from "next/image";
 import Button from "../common/Button";
 import { handleTitle } from "../../utils/format";
 import { AddIcon, DeleteIcon } from "../common/Icons";
-import LinkButton from "../common/Button/LinkButton";
+import { openModal } from "../../redux/modal/slice";
 
 const MyBuilds = () => {
   const { handleGetBuilds, handleDeleteBuild } = useBuilds();
@@ -21,15 +21,24 @@ const MyBuilds = () => {
 
   const { items, setPagination } = usePagination();
 
+  const dispatch = useAppDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
+  };
+
   return (
     <div className="min-h-total">
       {loading && <LoadingSpinner />}
       <h1 className="text-start text-2xl my-4 mt-8">Minhas builds</h1>
-      <LinkButton href="/create-build">
+      <Button
+        className="hover:bg-blue-600 bg-blue-500 focus:bg-blue-600  shadow-lg text-gray-200 px-6 py-2 rounded font-medium inline-block ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40"
+        click={handleOpenModal}
+      >
         <span className="flex items-center">
           <AddIcon className="text-xl mr-1" /> Criar Build
         </span>
-      </LinkButton>
+      </Button>
 
       <div className="my-4">
         {builds?.length === 0 ? (
@@ -59,10 +68,15 @@ const MyBuilds = () => {
                       </div>
                       {b.build.map((item, k) => (
                         <Card key={k}>
-                          <p className="font-bold text-xl flex items-center">
-                            R${item.price}
-                          </p>
-                          <h2 className="flex items-center text-lg md:text-xl text-start text-blue-500">
+                          <div className="relative md:w-32 w-20 h-14">
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              layout="fill"
+                              objectFit="cover"
+                            />
+                          </div>
+                          <h2 className="flex items-center mr-auto text-lg md:text-xl text-start text-blue-500">
                             <a
                               className="cursor-pointer"
                               href={item.url}
@@ -72,15 +86,9 @@ const MyBuilds = () => {
                               {handleTitle(item.title)}
                             </a>
                           </h2>
-
-                          <div className="relative w-32">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              layout="fill"
-                              objectFit="cover"
-                            />
-                          </div>
+                          <p className="font-bold text-xl flex items-center">
+                            R${item.price}
+                          </p>
                         </Card>
                       ))}
                     </div>

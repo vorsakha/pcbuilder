@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import useBuildForm from "../../hooks/useBuildForm";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import Button from "../common/Button";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Image from "next/image";
 import Card from "../common/Card";
-import { handleTitle } from "../../utils/format";
+// import { handleTitle } from "../../utils/format";
 import { AddIcon, RemoveIcon, CloseIcon } from "../common/Icons";
 import { closeModal } from "../../redux/modal/slice";
+// import useBuilds from "../../hooks/useBuilds";
 
 const CreateBuild = () => {
   const { loading } = useAppSelector((state) => state.builds);
@@ -48,7 +49,7 @@ const CreateBuild = () => {
                 </div>
                 <form
                   className="border shadow-lg rounded px-6 sm:px-12 pt-6 pb-8"
-                  onSubmit={(e) => handleSubmit(e)}
+                  onSubmit={handleSubmit}
                 >
                   {loading && <LoadingSpinner />}
                   <h1 className="text-2xl flex justify-center py-2 mb-4">
@@ -62,7 +63,7 @@ const CreateBuild = () => {
                     type="text"
                     name="name"
                     placeholder="Nome da build"
-                    onChange={(e) => handleInputChange(e)}
+                    onChange={handleInputChange}
                     value={formInput.name}
                     required
                     autoComplete="Nome da build"
@@ -76,7 +77,7 @@ const CreateBuild = () => {
                       type="text"
                       name="url"
                       placeholder="URL"
-                      onChange={(e) => handleInputChange(e)}
+                      onChange={handleInputChange}
                       value={formInput.url}
                       required
                       autoComplete="URL"
@@ -85,7 +86,7 @@ const CreateBuild = () => {
                       className="text-gray-700 w-full py-2 px-3 focus:outline-none focus:ring ring-1 ring-black ring-opacity-20 rounded mb-2"
                       name="platform"
                       required
-                      onChange={(e) => handleInputChange(e)}
+                      onChange={handleInputChange}
                       value={formInput.platform}
                     >
                       <option
@@ -136,13 +137,13 @@ const CreateBuild = () => {
                               />
                             </div>
 
-                            <h2 className="flex items-center">
+                            {/* <h2 className="flex items-center">
                               {handleTitle(item.title, true)}
-                            </h2>
-                            <h3 className="flex items-center">
+                            </h2> */}
+                            <h3 className="flex items-center mx-auto">
                               <strong>R${item.price}</strong>
                             </h3>
-                            <div className="flex items-center">
+                            <div className="flex items-center ml-auto">
                               <div>
                                 <Button
                                   danger

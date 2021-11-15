@@ -6,6 +6,7 @@ import { ScrapeTypes } from "../interfaces";
 import { generateAlert } from "../redux/alert/slice";
 import { createBuild } from "../redux/builds/thunk";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
+import useBuilds from "./useBuilds";
 
 interface BuildForm {
   name: string;
@@ -115,6 +116,8 @@ const useBuildForm = () => {
     setItemLoading(false);
   };
 
+  const { handleGetBuilds } = useBuilds();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -124,10 +127,14 @@ const useBuildForm = () => {
         build: buildArr,
       })
     );
+
+    return;
   };
 
   useEffect(() => {
     if (alert.type === "SUCCESS") {
+      handleGetBuilds();
+
       setFormInput({
         name: "",
         url: "",
@@ -135,7 +142,7 @@ const useBuildForm = () => {
       });
       setBuildArr([]);
     }
-  }, [alert]);
+  }, [alert, handleGetBuilds]);
 
   return {
     handleAddItem,

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useBuilds from "../../hooks/useBuilds";
-import usePagination from "../../hooks/usePagination";
+// import usePagination from "../../hooks/usePagination";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import Card from "../common/Card";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -19,7 +19,7 @@ const MyBuilds = () => {
     handleGetBuilds();
   }, [handleGetBuilds]);
 
-  const { items, setPagination } = usePagination();
+  // const { items, setPagination } = usePagination();
 
   const dispatch = useAppDispatch();
 
@@ -46,65 +46,63 @@ const MyBuilds = () => {
         ) : (
           <ul className="justify-center w-full">
             {builds !== null &&
-              builds.map(
-                (b, key) =>
-                  key < items && (
-                    <div
-                      className="grid grid-cols-1 gap-6 my-8 relative border-t md:p-4"
-                      key={key}
+              builds.map((b, key) => (
+                // key < items &&
+                <div
+                  className="grid grid-cols-1 gap-6 my-8 relative border-t md:p-4"
+                  key={key}
+                >
+                  <h2 className="col-span-1 text-xl text-start font-bold mt-4 md:mt-0">
+                    {b.name}
+                  </h2>
+                  <div className="col-span-1 flex justify-end absolute top-0 right-0 mt-2 md:mt-4 md:mr-4">
+                    <Button
+                      className="text-xl"
+                      danger
+                      disabled={loading}
+                      click={() => handleDeleteBuild(b.id)}
                     >
-                      <h2 className="col-span-1 text-xl text-start font-bold mt-4 md:mt-0">
-                        {b.name}
-                      </h2>
-                      <div className="col-span-1 flex justify-end absolute top-0 right-0 mt-2 md:mt-4 md:mr-4">
-                        <Button
-                          className="text-xl"
-                          danger
-                          disabled={loading}
-                          click={() => handleDeleteBuild(b.id)}
-                        >
-                          <DeleteIcon />
-                        </Button>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                  {b.build.map((item, k) => (
+                    <Card key={k}>
+                      <div className="relative md:w-32 w-20 h-14">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          layout="fill"
+                          objectFit="cover"
+                        />
                       </div>
-                      {b.build.map((item, k) => (
-                        <Card key={k}>
-                          <div className="relative md:w-32 w-20 h-14">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              layout="fill"
-                              objectFit="cover"
-                            />
-                          </div>
-                          <h2 className="flex items-center mr-auto text-lg md:text-xl text-start text-blue-500">
-                            <a
-                              className="cursor-pointer"
-                              href={item.url}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              {handleTitle(item.title)}
-                            </a>
-                          </h2>
-                          <p className="font-bold text-xl flex items-center">
-                            R${item.price}
-                          </p>
-                        </Card>
-                      ))}
-                    </div>
-                  )
-              )}
+                      <h2 className="flex items-center mr-auto text-lg md:text-xl text-start text-blue-500">
+                        <a
+                          className="cursor-pointer"
+                          href={item.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {handleTitle(item.title)}
+                        </a>
+                      </h2>
+                      <p className="font-bold text-xl flex items-center">
+                        R${item.price}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              ))}
           </ul>
         )}
-        {builds !== null && items < 20
+        {/* {builds !== null && items < 20
           ? builds.length > 6 && (
               <div className="flex flex-row justify-center mt-8">
                 <Button
-                  className="ml-4"
+                  className="ml-4 hover:bg-blue-600 bg-blue-500 focus:bg-blue-600  shadow-lg text-gray-200 px-6 py-2 rounded font-medium inline-block ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40"
                   click={() => setPagination("more")}
                   transparent
                 >
-                  Load More
+                  Carregar Mais
                 </Button>
               </div>
             )
@@ -112,14 +110,14 @@ const MyBuilds = () => {
             builds.length !== 0 && (
               <div className="flex flex-row justify-center mt-8">
                 <Button
-                  className="ml-4"
+                  className="ml-4 hover:bg-blue-600 bg-blue-500 focus:bg-blue-600  shadow-lg text-gray-200 px-6 py-2 rounded font-medium inline-block ring-black ring-opacity-5 transition ease-in-out disabled:opacity-40"
                   click={() => setPagination("less")}
                   transparent
                 >
-                  Load less
+                  Carregar Menos
                 </Button>
               </div>
-            )}
+            )} */}
       </div>
     </div>
   );
